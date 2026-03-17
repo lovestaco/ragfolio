@@ -1,48 +1,49 @@
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 export function Experience() {
-    return (
-        <section id="experience" className="py-12 px-4 border-t border-zinc-800/50">
-            <div className="max-w-4xl mx-auto">
-                <h2 className="text-2xl font-semibold text-white mb-6">Experience</h2>
-                <div className="space-y-12">
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="relative pl-8 border-l border-zinc-800"
-                    >
-                        <div className="absolute w-3 h-3 bg-blue-500 rounded-full -left-[6.5px] top-1.5 ring-4 ring-zinc-950"></div>
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
-                            <h3 className="text-lg font-medium text-white">Software Engineer</h3>
-                            <span className="text-sm text-zinc-500">Jan 2023 - Present</span>
-                        </div>
-                        <p className="text-blue-400 text-sm mb-3">Company Name</p>
-                        <p className="text-zinc-400 text-sm leading-relaxed">
-                            Description of your role and key achievements. Mention specific technologies and impact.
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        className="relative pl-8 border-l border-zinc-800"
-                    >
-                        <div className="absolute w-3 h-3 bg-zinc-700 rounded-full -left-[6.5px] top-1.5 ring-4 ring-zinc-950"></div>
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
-                            <h3 className="text-lg font-medium text-white">Intern developer</h3>
-                            <span className="text-sm text-zinc-500">Jun 2022 - Dec 2022</span>
-                        </div>
-                        <p className="text-blue-400 text-sm mb-3">Previous Company</p>
-                        <p className="text-zinc-400 text-sm leading-relaxed">
-                            Description of tasks and what you learned during this period.
-                        </p>
-                    </motion.div>
-                </div>
+  return (
+    <section
+      id="experience"
+      className="py-12 px-4 border-t border-zinc-800/50 bg-gradient-to-br from-[#1a093b] via-[#2a145c] to-[#0f0c29]"
+    >
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-2xl font-semibold text-purple-300 mb-6">
+          Experience
+        </h2>
+        <div className="space-y-12">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative pl-8 border-l border-purple-900"
+          >
+            <div className="absolute w-3 h-3 bg-purple-500 rounded-full -left-[6.5px] top-1.5 ring-4 ring-purple-900 animate-pulse"></div>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+              <h3 className="text-lg font-medium text-purple-200">
+                Software Development Engineer Intern
+              </h3>
+              <span className="text-sm text-purple-400 font-mono">
+                Sep 2021 – Feb 2023
+              </span>
             </div>
-        </section>
-    )
+            <p className="text-purple-300 text-sm mb-3">
+              Hexmos, Bengaluru, India
+            </p>
+            <div className="bg-zinc-900/60 rounded-xl shadow-md shadow-purple-900/10 p-6">
+              <p className="text-zinc-200 text-sm leading-relaxed">
+                Built production-grade systems across backend, frontend, and
+                DevOps. Developed LiveAPI (API documentation automation),
+                payment and licensing infrastructure, and private runner setups.
+                Implemented REST APIs (Python/Django, Node.js, Go), designed
+                PostgreSQL schemas, optimized LLM prompts, and contributed to
+                FreeDevTools (static platform, SEO, Meilisearch, 8M+
+                impressions). Mentored 4 students into web developers.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
 }

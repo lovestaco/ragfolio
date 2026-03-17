@@ -1,43 +1,59 @@
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 export function Skills() {
-    const categories = [
-        { name: 'Languages', skills: ['JavaScript', 'TypeScript', 'Python', 'Go'] },
-        { name: 'Frontend', skills: ['React', 'Next.js', 'Tailwind CSS'] },
-        { name: 'Backend', skills: ['Node.js', 'FastAPI', 'PostgreSQL'] },
-        { name: 'Tools', skills: ['Git', 'Docker', 'AWS'] },
-    ]
+  const categories = [
+    {
+      name: "Languages",
+      skills: ["Python", "Go", "JavaScript", "Java", "SQL"],
+    },
+    { name: "Frontend", skills: ["React", "React Native", "Figma", "Astro"] },
+    { name: "Backend", skills: ["Django", "Node.js", "PostgreSQL", "Parse"] },
+    {
+      name: "Cloud/Tools",
+      skills: [
+        "Meilisearch",
+        "Static Site Generation",
+        "Prompt Engineering",
+        "DevOps",
+        "Git",
+      ],
+    },
+  ];
 
-    return (
-        <section className="py-12 px-4 border-t border-zinc-800/50">
-            <div className="max-w-4xl mx-auto">
-                <h2 className="text-2xl font-semibold text-white mb-6">Skills & Languages</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {categories.map((cat, idx) => (
-                        <motion.div
-                            key={cat.name}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: idx * 0.1 }}
-                        >
-                            <h3 className="text-sm font-medium text-zinc-500 uppercase tracking-wider mb-4 border-b border-zinc-900 pb-2">
-                                {cat.name}
-                            </h3>
-                            <div className="flex flex-wrap gap-2">
-                                {cat.skills.map((skill) => (
-                                    <span
-                                        key={skill}
-                                        className="px-3 py-1.5 rounded-lg bg-zinc-900/50 border border-zinc-800 text-zinc-300 text-xs hover:border-zinc-700 transition-colors"
-                                    >
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    )
+  return (
+    <section className="py-12 px-4 border-t border-zinc-800/50 bg-gradient-to-br from-[#1a093b] via-[#2a145c] to-[#0f0c29]">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-2xl font-semibold text-purple-300 mb-6">
+          Skills & Languages
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {categories.map((cat, idx) => (
+            <motion.div
+              key={cat.name}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="bg-zinc-900/60 rounded-xl shadow-md shadow-purple-900/10 p-6"
+            >
+              <h3 className="text-sm font-medium text-purple-400 uppercase tracking-wider mb-4 border-b border-purple-900 pb-2">
+                {cat.name}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {cat.skills.map((skill) => (
+                  <motion.span
+                    key={skill}
+                    whileHover={{ scale: 1.08, backgroundColor: "#6c3fcf" }}
+                    className="px-3 py-1.5 rounded-lg bg-purple-900/30 border border-purple-700 text-purple-200 text-xs hover:border-purple-400 transition-colors shadow-sm"
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
