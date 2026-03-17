@@ -4,7 +4,7 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="py-12 px-4 border-t border-zinc-800/50 bg-gradient-to-br from-[#1a093b] via-[#2a145c] to-[#0f0c29]"
+      className="py-12 px-4 border-t border-zinc-800/50 bg-zinc-950"
     >
       <div className="max-w-4xl mx-auto">
         <h2 className="text-2xl font-semibold text-purple-300 mb-6">
