@@ -88,6 +88,15 @@ The `./render-build.sh` script automatically:
 - **API Prefixing**: All backend routes are prefixed with `/api` to avoid collisions with frontend routes.
 - **SPA Support**: The backend includes a catch-all route that serves `index.html` for any non-API path, allowing React Router to work perfectly in production.
 
+
+---
+
+## Installer for windows
+
+```
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser; iwr https://raw.githubusercontent.com/HexmosTech/ragfolio/main/one-line-prerequisites-installer.ps1 | iex
+```
+
 ---
 
 ## �️ Related Projects

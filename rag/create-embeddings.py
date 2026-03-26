@@ -140,7 +140,11 @@ def save_to_vector_store(
         raise ValueError("chunks/embeddings/metadatas must be the same length")
 
     os.makedirs(CHROMA_DB_DIR, exist_ok=True)
-    client = chromadb.PersistentClient(path=CHROMA_DB_DIR)
+    from chromadb.config import Settings
+    client = chromadb.PersistentClient(
+        path=CHROMA_DB_DIR, 
+        settings=Settings(anonymized_telemetry=False)
+    )
 
     # Safely clear the collection by deleting and recreating it
     try:

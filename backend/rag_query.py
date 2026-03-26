@@ -25,7 +25,7 @@ CHROMA_DB_DIR = os.path.join(
 COLLECTION_NAME = "resume_chunks"
 GEMINI_API_URL = (
     "https://generativelanguage.googleapis.com/v1beta/models/"
-    "gemini-flash-latest:generateContent"
+    "gemini-2.5-flash-lite:generateContent"
 )
 
 
@@ -43,7 +43,11 @@ def _get_embedding_model() -> TextEmbedding:
 def _get_chroma_collection():
     global _chroma_collection
     if _chroma_collection is None:
-        client = chromadb.PersistentClient(path=CHROMA_DB_DIR)
+        from chromadb.config import Settings
+        client = chromadb.PersistentClient(
+            path=CHROMA_DB_DIR, 
+            settings=Settings(anonymized_telemetry=False)
+        )
         _chroma_collection = client.get_or_create_collection(name=COLLECTION_NAME)
     return _chroma_collection
 

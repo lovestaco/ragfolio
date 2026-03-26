@@ -14,23 +14,34 @@ The output should include:
 3.  **State Management**: Ensure messages are updated correctly for both user and AI responses.
 4.  **Loading States**: Display a loading indicator while waiting for the AI response.
 5.  **Error Handling**: Gracefully handle network errors and API errors by displaying helpful messages in the chat interface.
-6.  **Auto-Scroll**: (Optional but recommended) Ensure the chat window scrolls to the latest message.
+6.  **Health Check + Navbar Status**: Call a `GET /health` endpoint to determine whether the backend is reachable, and display **Backend: Online/Offline** in the UI navbar.
+7.  **Auto-Scroll**: (Optional but recommended) Ensure the chat window scrolls to the latest message.
 
 ---
 
 ### TECHNICAL REQUIREMENTS
 
-1.  **API Call**:
+1.  **Ask API Call**:
     *   Endpoint: `${BACKEND_URL}/ask`
     *   Method: `POST`
     *   Body: `{ "question": string }`
-2.  **Logic for `handleSend`**:
+2.  **Health API Call**:
+    *   Endpoint: `${BACKEND_URL}/health`
+    *   Method: `GET`
+    *   Expected: `200 OK` indicates online (don’t hard-depend on a specific JSON shape).
+    *   Timing: Run once on mount and poll every 10 seconds.
+    *   Robustness: Use a request timeout (e.g. `AbortController` with 2–5s) so the UI doesn’t hang on network stalls.
+3.  **Logic for `handleSend`**:
     *   Add the user's question to the `messages` array immediately.
     *   Set `loading` to `true`.
     *   Fetch the data using a try-catch block.
     *   On success, add the AI's answer to the `messages` array.
     *   On failure, add an "Error" message to the `messages` array.
     *   Always set `loading` to `false` at the end.
+4.  **Navbar Status UI**:
+    *   Show a compact status indicator in the navbar area (e.g. “Backend: Online” in green / “Backend: Offline” in red).
+    *   Preserve existing styling and layout; implement the indicator in `Chatbot.tsx` only if it already owns the navbar UI.
+    *   If the navbar lives elsewhere, also update the appropriate navbar component to render the status (keep changes minimal and consistent with existing patterns).
 
 ---
 

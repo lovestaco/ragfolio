@@ -22,6 +22,12 @@ The output should:
 6. Include technical interview questions related to the candidate's work
 7. Add alternative phrasings and semantic variations of key information
 8. Ensure the text is highly descriptive so embedding models capture meaning
+9. Preserve the candidate's identity and contact details exactly as written in the resume:
+   - full name
+   - phone number(s)
+   - email address(es)
+   - location
+   - social accounts and links (e.g., LinkedIn, GitHub, portfolio, Twitter/X, personal website)
 
 Do NOT shorten anything. Add depth.
 
