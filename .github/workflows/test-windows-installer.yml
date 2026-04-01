@@ -1,0 +1,29 @@
+name: Test Windows Installer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "one-line-prerequisites-installer.ps1"
+      - ".github/workflows/test-windows-installer.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "one-line-prerequisites-installer.ps1"
+      - ".github/workflows/test-windows-installer.yml"
+  workflow_dispatch:
+
+jobs:
+  test-installer:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run installer script
+        shell: powershell
+        run: |
+          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+          iwr https://raw.githubusercontent.com/HexmosTech/ragfolio/main/one-line-prerequisites-installer.ps1 -OutFile installer.ps1
+          powershell -ExecutionPolicy Bypass -File .\installer.ps1 -Email "athreyac8@gmail.com"

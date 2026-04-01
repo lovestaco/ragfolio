@@ -1,14 +1,19 @@
 import os
+import logging
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-
+from typing import Any, Dict
 try:
     from .rag_query import answer_question
-except (ImportError, ValueError):
+except ImportError:
     from rag_query import answer_question
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger("ragfolio")
 
 app = FastAPI(
     title="Ragfolio RAG API",
@@ -25,6 +30,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    """
+    Middleware to log request start and end with latency.
+    """
+    logger.debug(f"Request start: {request.method} {request.url}")
+    response = await call_next(request)
+    logger.debug(f"Request end: {request.method} {request.url} - Status: {response.status_code}")
+    return response
 
 class AskRequest(BaseModel):
     """
@@ -56,17 +70,26 @@ async def ask(request: AskRequest):
     """
     # Validate that the question is not empty or whitespace-only
     if not request.question or not request.question.strip():
+        logger.debug("Validation failed: Question is empty or whitespace only.")
         raise HTTPException(
             status_code=400,
             detail="Question cannot be empty or whitespace only.",
         )
 
     try:
+        # Log the incoming question
+        logger.debug(f"Incoming question: {request.question}")
+
         # Integrate with the RAG query engine
         answer = answer_question(request.question)
+
+        # Log the response
+        logger.debug(f"Generated answer: {answer}")
+
         return AskResponse(answer=answer)
     except Exception as e:
-        # Proper exception handling with error details
+        # Log the exception with stack trace
+        logger.exception("An error occurred during RAG processing.")
         raise HTTPException(
             status_code=500,
             detail=f"An error occurred during RAG processing: {str(e)}",
@@ -95,4 +118,5 @@ if os.path.exists(FRONTEND_DIST_DIR):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=int(os.getenv("PORT", 8000)))
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+
